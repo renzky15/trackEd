@@ -21,7 +21,7 @@ export async function GET(
     }
 
     return NextResponse.json(feedback);
-  } catch (error) {
+  } catch (_) {
     return NextResponse.json(
       { error: "Failed to fetch feedback" },
       { status: 500 }
@@ -49,7 +49,7 @@ export async function PUT(
     });
 
     return NextResponse.json(feedback);
-  } catch (error) {
+  } catch (_) {
     return NextResponse.json(
       { error: "Failed to update feedback" },
       { status: 500 }
@@ -70,7 +70,7 @@ export async function DELETE(
     });
 
     return new NextResponse(null, { status: 204 });
-  } catch (error) {
+  } catch (_) {
     return NextResponse.json(
       { error: "Failed to delete feedback" },
       { status: 500 }

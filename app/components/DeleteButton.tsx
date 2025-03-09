@@ -28,7 +28,7 @@ export default function DeleteButton({ id }: DeleteButtonProps) {
       }
 
       router.refresh();
-    } catch (error) {
+    } catch {
       const errorDialog = document.getElementById(
         "error_modal"
       ) as HTMLDialogElement;
