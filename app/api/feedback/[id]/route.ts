@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 
-type RouteParams = { params: { id: string } };
-
 // GET single feedback
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const feedback = await prisma.feedback.findUnique({
       where: {
@@ -30,7 +31,10 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 }
 
 // PUT update feedback
-export async function PUT(request: NextRequest, { params }: RouteParams) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const body = await request.json();
     const feedback = await prisma.feedback.update({
@@ -56,7 +60,10 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 }
 
 // DELETE feedback
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     await prisma.feedback.delete({
       where: {
