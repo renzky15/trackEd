@@ -1,11 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 
+type RouteParams = { params: { id: string } };
+
 // GET single feedback
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const feedback = await prisma.feedback.findUnique({
       where: {
@@ -22,7 +21,6 @@ export async function GET(
 
     return NextResponse.json(feedback);
   } catch (_) {
-    console.error("Error ocurred:", _);
     return NextResponse.json(
       { error: "Failed to fetch feedback" },
       { status: 500 }
@@ -31,10 +29,7 @@ export async function GET(
 }
 
 // PUT update feedback
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
     const body = await request.json();
     const feedback = await prisma.feedback.update({
@@ -51,7 +46,6 @@ export async function PUT(
 
     return NextResponse.json(feedback);
   } catch (_) {
-    console.error("Error ocurred:", _);
     return NextResponse.json(
       { error: "Failed to update feedback" },
       { status: 500 }
@@ -60,10 +54,7 @@ export async function PUT(
 }
 
 // DELETE feedback
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     await prisma.feedback.delete({
       where: {
@@ -73,7 +64,6 @@ export async function DELETE(
 
     return new NextResponse(null, { status: 204 });
   } catch (_) {
-    console.error("Error ocurred:", _);
     return NextResponse.json(
       { error: "Failed to delete feedback" },
       { status: 500 }
