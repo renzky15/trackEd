@@ -21,6 +21,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
     return NextResponse.json(feedback);
   } catch (_) {
+    console.error("Error ocurred:", _);
     return NextResponse.json(
       { error: "Failed to fetch feedback" },
       { status: 500 }
@@ -46,6 +47,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
     return NextResponse.json(feedback);
   } catch (_) {
+    console.error("Error ocurred:", _);
     return NextResponse.json(
       { error: "Failed to update feedback" },
       { status: 500 }
@@ -64,6 +66,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 
     return new NextResponse(null, { status: 204 });
   } catch (_) {
+    console.error("Error ocurred:", _);
     return NextResponse.json(
       { error: "Failed to delete feedback" },
       { status: 500 }
