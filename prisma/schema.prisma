@@ -9,9 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Account {
@@ -69,12 +68,12 @@ model Feedback {
   title     String
   content   String
   rating    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   category  String?
   status    Status   @default(IN_PROGRESS)
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Category {
@@ -89,13 +88,13 @@ enum Status {
 }
 
 enum Role {
-  SUPER_ADMIN
+  USER
   ADMIN
+  SUPER_ADMIN
   ADMIN_STAFF
   ADMIN_FACILITIES
   ADMIN_EXTRACURRICULAR
   ADMIN_RESOURCES
   ADMIN_CURRICULUM
   ADMIN_POLICIES
-  USER
 }

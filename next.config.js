@@ -6,6 +6,10 @@ const nextConfig = {
     // your project has type errors.
     ignoreBuildErrors: true,
   },
+  output: "standalone", // Optimizes for container deployment
+  images: {
+    domains: ["your-domain.com"], // Add your domain
+  },
 };
 
 module.exports = nextConfig;

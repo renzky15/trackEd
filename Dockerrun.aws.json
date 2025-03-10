@@ -1,0 +1,15 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "399373524415.dkr.ecr.ap-northeast-1.amazonaws.com/tracked-app:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "3000",
+      "HostPort": "80"
+    }
+  ],
+  "Volumes": [],
+  "Logging": "/var/log/nginx"
+}
