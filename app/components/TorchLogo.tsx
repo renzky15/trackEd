@@ -8,16 +8,14 @@ export default function TorchLogo({
   percent?: string;
 }) {
   return (
-    <div className="flex items-center justify-center">
-      <Image
-        className={className}
-        src="/logo.png"
-        alt="Torch Logo"
-        width={0}
-        height={0}
-        sizes="100vw"
-        style={{ width: percent, height: "auto" }}
-      />
-    </div>
+    <Image
+      className={className}
+      src="/logo.png"
+      alt="Torch Logo"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: percent, height: "auto" }}
+    />
   );
 }

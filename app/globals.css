@@ -20,6 +20,9 @@
     --color-base-100: oklch(97.21% 0.052 86.97);
     --color-base-200: oklch(87.49% 0.047 86.97);
     --color-base-300: oklch(77.78% 0.042 86.97);
+    --color-base-content-100: oklch(
+      30% 0.05 86.97
+    ); /* Darker text for high contrast */
   }
   [data-theme="dark"] {
     color-scheme: light;
@@ -34,6 +37,7 @@
     --color-base-100: oklch(97.21% 0.052 86.97);
     --color-base-200: oklch(87.49% 0.047 86.97);
     --color-base-300: oklch(77.78% 0.042 86.97);
+    --color-base-content-100: oklch(30% 0.05 86.97);
   }
 }
 
