@@ -80,7 +80,7 @@ export default function Header() {
       <div className="navbar container mx-auto">
         <div className="flex-1">
           <Link href="/" className="text-xl font-bold flex items-center gap-2">
-            <TorchLogo className="w-8 h-8" />
+            <TorchLogo className="w-8 h-8" percent={"15%"} />
             TrackEd
           </Link>
         </div>

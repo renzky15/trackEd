@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { email, password, name, role } = body;
+    const { email, password, name, role, lrnId } = body;
 
     console.log("Received role:", role); // Debug log
 
@@ -44,6 +44,14 @@ export async function POST(request: Request) {
       );
     }
 
+    // Validate LRN ID for USER role
+    if (role === "USER" && !lrnId) {
+      return NextResponse.json(
+        { error: "LRN ID is required for user role" },
+        { status: 400 }
+      );
+    }
+
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
@@ -56,6 +64,20 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if LRN ID already exists for USER role
+    if (role === "USER" && lrnId) {
+      const existingLrnId = await prisma.user.findUnique({
+        where: { lrnId },
+      });
+
+      if (existingLrnId) {
+        return NextResponse.json(
+          { error: "LRN ID already exists" },
+          { status: 400 }
+        );
+      }
+    }
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -66,6 +88,7 @@ export async function POST(request: Request) {
         name,
         password: hashedPassword,
         role: role as Role,
+        ...(role === "USER" && { lrnId }),
       },
     });
 

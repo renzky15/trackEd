@@ -2,8 +2,10 @@ import Image from "next/image";
 
 export default function TorchLogo({
   className = "w-6 h-6",
+  percent = "30%",
 }: {
   className?: string;
+  percent?: string;
 }) {
   return (
     <div className="flex items-center justify-center">
@@ -14,7 +16,7 @@ export default function TorchLogo({
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: "30%", height: "auto" }}
+        style={{ width: percent, height: "auto" }}
       />
     </div>
   );

@@ -21,6 +21,7 @@ export default function CreateUserForm() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [selectedRole, setSelectedRole] = useState<Role>("USER");
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +37,7 @@ export default function CreateUserForm() {
       password: formData.get("password") as string,
       name: formData.get("name") as string,
       role,
+      ...(role === "USER" && { lrnId: formData.get("lrnId") as string }),
     };
 
     console.log("Submitting user data:", { ...data, password: "[REDACTED]" }); // Debug log
@@ -69,74 +71,93 @@ export default function CreateUserForm() {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-      {error && (
-        <div className="alert alert-error">
-          <span>{error}</span>
-        </div>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Name</span>
-          </label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter name"
-            required
-            className="input input-bordered w-full"
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter email"
-            required
-            className="input input-bordered w-full"
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Password</span>
-          </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter password"
-            required
-            className="input input-bordered w-full"
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Role</span>
-          </label>
-          <select
-            name="role"
-            className="select select-bordered w-full"
-            required
-            defaultValue="USER"
+    <div className="card bg-base-100 shadow-xl">
+      <div className="card-body">
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+          {error && (
+            <div className="alert alert-error bg-error text-error-content">
+              <span>{error}</span>
+            </div>
+          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base-content">Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter name"
+                required
+                className="input input-bordered w-full bg-base-200 text-base-content"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base-content">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                required
+                className="input input-bordered w-full bg-base-200 text-base-content"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base-content">Password</span>
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+                className="input input-bordered w-full bg-base-200 text-base-content"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base-content">Role</span>
+              </label>
+              <select
+                name="role"
+                className="select select-bordered w-full bg-base-200 text-base-content"
+                required
+                defaultValue="USER"
+                onChange={(e) => setSelectedRole(e.target.value as Role)}
+              >
+                {ROLE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {selectedRole === "USER" && (
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-base-content">LRN ID</span>
+                </label>
+                <input
+                  type="text"
+                  name="lrnId"
+                  placeholder="Enter LRN ID"
+                  required
+                  className="input input-bordered w-full bg-base-200 text-base-content"
+                />
+              </div>
+            )}
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary w-full bg-primary hover:bg-primary-focus text-primary-content"
+            disabled={loading}
           >
-            {ROLE_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+            {loading ? "Creating..." : "Create User"}
+          </button>
+        </form>
       </div>
-      <button
-        type="submit"
-        className="btn btn-primary w-full"
-        disabled={loading}
-      >
-        {loading ? "Creating..." : "Create User"}
-      </button>
-    </form>
+    </div>
   );
 }

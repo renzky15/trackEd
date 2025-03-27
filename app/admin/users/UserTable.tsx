@@ -6,7 +6,7 @@ import { format } from "date-fns";
 interface UserTableProps {
   users: Pick<
     User,
-    "id" | "name" | "email" | "role" | "createdAt" | "updatedAt"
+    "id" | "name" | "email" | "role" | "createdAt" | "updatedAt" | "lrnId"
   >[];
 }
 
@@ -19,6 +19,7 @@ export default function UserTable({ users }: UserTableProps) {
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            <th>LRN ID</th>
             <th>Created At</th>
             <th>Updated At</th>
           </tr>
@@ -31,6 +32,7 @@ export default function UserTable({ users }: UserTableProps) {
               <td>
                 <span className="badge badge-outline">{user.role}</span>
               </td>
+              <td>{user.lrnId || "-"}</td>
               <td>{format(user.createdAt, "PPP")}</td>
               <td>{format(user.updatedAt, "PPP")}</td>
             </tr>

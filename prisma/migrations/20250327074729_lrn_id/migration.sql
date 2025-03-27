@@ -9,10 +9,10 @@
 ALTER TABLE "Feedback" DROP CONSTRAINT "Feedback_userId_fkey";
 
 -- AlterTable
-ALTER TABLE "User" ADD COLUMN     "lrnId" TEXT NOT NULL;
+ALTER TABLE "User" ADD COLUMN "lrnId" TEXT;
 
--- CreateIndex
-CREATE UNIQUE INDEX "User_lrnId_key" ON "User"("lrnId");
+-- Add unique constraint
+ALTER TABLE "User" ADD CONSTRAINT "User_lrnId_key" UNIQUE ("lrnId");
 
 -- AddForeignKey
 ALTER TABLE "Feedback" ADD CONSTRAINT "Feedback_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
