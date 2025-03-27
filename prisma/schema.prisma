@@ -53,6 +53,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   feedback      Feedback[]
+  lrnId         String   @unique
 }
 
 model VerificationToken {
