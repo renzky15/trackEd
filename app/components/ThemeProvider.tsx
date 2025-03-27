@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "caramel" | "dark";
+type Theme = "light" | "dark";
 
 interface ThemeContextType {
   theme: Theme;
@@ -10,7 +10,7 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: "caramel",
+  theme: "dark",
   toggleTheme: () => {},
 });
 
@@ -19,7 +19,7 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("caramel");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     // Get the initial theme
@@ -27,7 +27,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const systemPrefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "caramel");
+    const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
 
     // Set theme in state and DOM
     setTheme(initialTheme);
@@ -45,7 +45,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "caramel" ? "dark" : "caramel";
+    const newTheme = theme === "dark" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);

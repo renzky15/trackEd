@@ -7,8 +7,33 @@
     color-scheme: light;
   }
 
+  [data-theme="light"] {
+    color-scheme: light;
+    --color-primary: #871f13;
+    --color-secondary: #fff7d9;
+    --color-accent: #871f13;
+    --color-neutral: #2a1f1f;
+    --color-info: #0ea5e9;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #dc2626;
+    --color-base-100: oklch(97.21% 0.052 86.97);
+    --color-base-200: oklch(87.49% 0.047 86.97);
+    --color-base-300: oklch(77.78% 0.042 86.97);
+  }
   [data-theme="dark"] {
     color-scheme: light;
+    --color-primary: #871f13;
+    --color-secondary: #fff7d9;
+    --color-accent: #871f13;
+    --color-neutral: #2a1f1f;
+    --color-info: #0ea5e9;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #dc2626;
+    --color-base-100: oklch(97.21% 0.052 86.97);
+    --color-base-200: oklch(87.49% 0.047 86.97);
+    --color-base-300: oklch(77.78% 0.042 86.97);
   }
 }
 
