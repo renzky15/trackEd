@@ -119,7 +119,7 @@ export default async function Home() {
                   <tr>
                     <th>Title</th>
                     <th>Category</th>
-                    <th>Rating</th>
+                    {/* <th>Rating</th> */}
                     <th>Content</th>
                     <th>Submitted By</th>
                     <th>Date</th>
@@ -141,7 +141,7 @@ export default async function Home() {
                           {item.category || "Uncategorized"}
                         </div>
                       </td>
-                      <td>
+                      {/* <td>
                         <div className="rating rating-sm">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <input
@@ -154,7 +154,7 @@ export default async function Home() {
                             />
                           ))}
                         </div>
-                      </td>
+                      </td> */}
                       <td className="max-w-xs">
                         <p className="truncate">{item.content}</p>
                       </td>
