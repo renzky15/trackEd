@@ -131,11 +131,10 @@ export async function POST(request: Request) {
     console.log("Received feedback data:", body);
 
     // Validate required fields
-    if (!body.title || !body.content || typeof body.rating !== "number") {
+    if (!body.title || !body.content) {
       console.error("Missing required fields:", {
         title: !body.title,
         content: !body.content,
-        rating: typeof body.rating !== "number",
       });
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -143,13 +142,19 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate rating range
-    if (body.rating < 1 || body.rating > 5) {
-      console.error("Invalid rating value:", body.rating);
-      return NextResponse.json(
-        { error: "Rating must be between 1 and 5" },
-        { status: 400 }
-      );
+    // Validate rating range only if rating is provided
+    if (body.rating !== undefined) {
+      if (
+        typeof body.rating !== "number" ||
+        body.rating < 1 ||
+        body.rating > 5
+      ) {
+        console.error("Invalid rating value:", body.rating);
+        return NextResponse.json(
+          { error: "Rating must be a number between 1 and 5" },
+          { status: 400 }
+        );
+      }
     }
 
     // Validate category
@@ -164,7 +169,7 @@ export async function POST(request: Request) {
     const feedbackData: Prisma.FeedbackUncheckedCreateInput = {
       title: body.title.trim(),
       content: body.content.trim(),
-      rating: body.rating,
+      ...(body.rating !== undefined && { rating: body.rating }),
       category: body.category?.trim() || null,
       status: "IN_PROGRESS",
       userId: session.user.id,

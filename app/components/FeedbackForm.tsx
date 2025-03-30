@@ -9,7 +9,7 @@ interface FeedbackFormProps {
     id?: number;
     title: string;
     content: string;
-    rating: number;
+    // rating: number;  // commented out
     category?: string;
     status?: Status;
   };
@@ -35,13 +35,13 @@ export default function FeedbackForm({ initialData, mode }: FeedbackFormProps) {
   const [formData, setFormData] = useState<{
     title: string;
     content: string;
-    rating: number;
+    // rating: number;  // commented out
     category: string;
     status: Status;
   }>({
     title: "",
     content: "",
-    rating: 5,
+    // rating: 5,  // commented out
     category: "",
     status: "IN_PROGRESS",
   });
@@ -50,7 +50,7 @@ export default function FeedbackForm({ initialData, mode }: FeedbackFormProps) {
     setFormData({
       title: initialData?.title || "",
       content: initialData?.content || "",
-      rating: initialData?.rating || 5,
+      // rating: initialData?.rating || 5,  // commented out
       category: initialData?.category || "",
       status: initialData?.status || "IN_PROGRESS",
     });
@@ -92,7 +92,7 @@ export default function FeedbackForm({ initialData, mode }: FeedbackFormProps) {
         body: JSON.stringify({
           title: formData.title,
           content: formData.content,
-          rating: Number(formData.rating),
+          // rating: Number(formData.rating),  // commented out
           category: formData.category,
           ...(mode === "edit" && { status: formData.status }),
         }),
@@ -169,6 +169,7 @@ export default function FeedbackForm({ initialData, mode }: FeedbackFormProps) {
             />
           </div>
 
+          {/* Comment out the entire rating form control
           <div className="form-control w-full flex flex-col gap-2">
             <label className="label">
               <span className="label-text">Rating</span>
@@ -187,6 +188,7 @@ export default function FeedbackForm({ initialData, mode }: FeedbackFormProps) {
               ))}
             </div>
           </div>
+          */}
 
           <div className="form-control w-full">
             <label className="label">

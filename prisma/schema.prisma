@@ -68,7 +68,7 @@ model Feedback {
   id        Int      @id @default(autoincrement())
   title     String
   content   String
-  rating    Int
+  rating    Int?
   category  String?
   status    Status   @default(IN_PROGRESS)
   userId    String
